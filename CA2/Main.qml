@@ -5,6 +5,10 @@ import QtSensors
 
 ApplicationWindow {
   id: root
+  width: 420
+  height: 760
+  visible: true
+  title: "Motion Based Auth"
 
   readonly property int defaultFontSize: 22
   readonly property int imageSize: width / 2
@@ -16,11 +20,6 @@ ApplicationWindow {
   property bool isRecording: false
   property bool isAuth: false
 
-  width: 420
-  height: 760
-  visible: true
-  title: "Motion Based Auth"
-
   function reset(): void {
     recordedPathdis = [];
     recordedPathdir = [];
@@ -29,7 +28,35 @@ ApplicationWindow {
 
     calibrate();
   }
+  
+  Button {
+        text: "شروع/توقف ضبط"
+        onClicked: startStopRecording()
+        anchors\.centerIn: parent
+        background: Rectangle {
+            implicitWidth: 150
+            implicitHeight: 50
+            color: "#f6f6f6"
+            border\.color: "#26282a"
+            border\.width: 1
+            radius: 25
+        }
+    }
 
+    Button {
+        text: "شروع/توقف تأیید هویت"
+        onClicked: startStopAuth()
+        anchors\.centerIn: parent
+        background: Rectangle {
+            implicitWidth: 150
+            implicitHeight: 50
+            color: "#f6f6f6"
+            border\.color: "#26282a"
+            border\.width: 1
+            radius: 25
+        }
+    }
+    
   function calibrate(): void {
     accelerometer.cax += accelerometer.ax
     accelerometer.cay += accelerometer.ay
